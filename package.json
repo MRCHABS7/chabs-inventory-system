@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build"
+    "export": "echo 'Export is handled by next build with output: export'",
+    "deploy": "next build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

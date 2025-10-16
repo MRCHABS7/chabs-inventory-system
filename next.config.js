@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Remove static export - let Netlify handle it
+  output: 'export',
+  trailingSlash: true,
   images: {
     unoptimized: true
   },
