@@ -1,0 +1,13 @@
+Add these environment variables in Netlify:
+
+NEXT_PUBLIC_APP_NAME=CHABS
+NEXT_PUBLIC_VERSION=2.0.0
+NEXT_PUBLIC_ENVIRONMENT=production
+NEXT_PUBLIC_STORAGE_MODE=hybrid
+NEXT_PUBLIC_ENABLE_SYNC=true
+NEXT_PUBLIC_SYNC_INTERVAL=30000
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+NODE_ENV=production
+
+IMPORTANT: Replace the Supabase URL and key with your actual values!
