@@ -1,6 +1,0 @@
-{
-  "dependencies_to_add": {
-    "@supabase/supabase-js": "^2.38.0"
-  },
-  "install_command": "npm install @supabase/supabase-js"
-}
