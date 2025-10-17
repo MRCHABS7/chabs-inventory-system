@@ -77,9 +77,13 @@ ALTER TABLE quotations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE suppliers ENABLE ROW LEVEL SECURITY;
 
--- Create policies (allow all for now)
-CREATE POLICY "Allow all operations" ON customers FOR ALL USING (true);
-CREATE POLICY "Allow all operations" ON products FOR ALL USING (true);
-CREATE POLICY "Allow all operations" ON quotations FOR ALL USING (true);
-CREATE POLICY "Allow all operations" ON orders FOR ALL USING (true);
-CREATE POLICY "Allow all operations" ON suppliers FOR ALL USING (true);
+-- Create policies for authenticated users
+CREATE POLICY "Authenticated users can access customers" ON customers FOR ALL USING (auth.role() = 'authenticated');
+CREATE POLICY "Authenticated users can access products" ON products FOR ALL USING (auth.role() = 'authenticated');
+CREATE POLICY "Authenticated users can access quotations" ON quotations FOR ALL USING (auth.role() = 'authenticated');
+CREATE POLICY "Authenticated users can access orders" ON orders FOR ALL USING (auth.role() = 'authenticated');
+CREATE POLICY "Authenticated users can access suppliers" ON suppliers FOR ALL USING (auth.role() = 'authenticated');
+
+-- Create admin user (run this after setting up authentication)
+-- You'll need to sign up through the app first, then run this to make yourself admin
+-- UPDATE auth.users SET raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}' WHERE email = 'your-email@example.com';

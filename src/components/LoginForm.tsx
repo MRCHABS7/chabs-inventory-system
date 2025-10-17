@@ -1,25 +1,30 @@
 import { useState } from 'react';
-import { login } from '../lib/auth-simple';
+import { auth } from '../lib/auth-supabase';
 import { useRouter } from 'next/router';
 
-export default function LoginForm() {
+interface LoginFormProps {
+  onSwitchToSignUp: () => void;
+}
+
+export default function LoginForm({ onSwitchToSignUp }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState<'admin' | 'warehouse'>('admin');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const ok = login(email, password, role);
-    if (!ok) return alert('Invalid credentials');
+    setLoading(true);
+    setError('');
     
-    // Redirect based on role
-    if (role === 'warehouse') {
-      router.push('/warehouse-dashboard');
-    } else if (role === 'admin') {
-      router.push('/admin-dashboard');
-    } else {
-      router.push('/dashboard'); // fallback
+    try {
+      await auth.signIn(email, password);
+      router.push('/dashboard');
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -29,6 +34,12 @@ export default function LoginForm() {
         <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome Back</h2>
         <p className="text-gray-600">Sign in to your account</p>
       </div>
+      
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          {error}
+        </div>
+      )}
       
       <div className="space-y-4">
         <div>
@@ -55,25 +66,21 @@ export default function LoginForm() {
           />
         </div>
         
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Access Level</label>
-          <select className="input" value={role} onChange={e => setRole(e.target.value as any)}>
-            <option value="admin">Admin - Full System Access</option>
-            <option value="warehouse">Warehouse - Inventory & Stock Control</option>
-          </select>
-        </div>
+
       </div>
       
-      <button className="btn w-full text-lg py-4" type="submit">
-        🚀 Sign In
+      <button className="btn w-full text-lg py-4" type="submit" disabled={loading}>
+        {loading ? '🔄 Signing In...' : '🚀 Sign In'}
       </button>
       
-      <div className="text-center text-sm text-gray-500">
-        <p className="mb-2">Demo System - Use any credentials:</p>
-        <p className="text-xs">
-          📧 Email: admin@chabs.com<br/>
-          🔑 Password: admin123
-        </p>
+      <div className="text-center">
+        <button
+          type="button"
+          onClick={onSwitchToSignUp}
+          className="text-blue-600 hover:text-blue-500"
+        >
+          Don't have an account? Sign up
+        </button>
       </div>
     </form>
   );
