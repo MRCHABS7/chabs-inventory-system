@@ -1,12 +1,8 @@
 import { useState } from 'react';
-import { auth } from '../lib/auth-supabase';
+import { login } from '../lib/auth-simple';
 import { useRouter } from 'next/router';
 
-interface LoginFormProps {
-  onSwitchToSignUp: () => void;
-}
-
-export default function LoginForm({ onSwitchToSignUp }: LoginFormProps) {
+export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,10 +15,14 @@ export default function LoginForm({ onSwitchToSignUp }: LoginFormProps) {
     setError('');
     
     try {
-      await auth.signIn(email, password);
-      router.push('/dashboard');
+      const success = login(email, password);
+      if (success) {
+        router.push('/dashboard');
+      } else {
+        setError('Invalid email or password');
+      }
     } catch (err: any) {
-      setError(err.message);
+      setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -73,14 +73,9 @@ export default function LoginForm({ onSwitchToSignUp }: LoginFormProps) {
         {loading ? 'Signing In...' : 'Sign In'}
       </button>
       
-      <div className="text-center">
-        <button
-          type="button"
-          onClick={onSwitchToSignUp}
-          className="text-blue-600 hover:text-blue-500"
-        >
-          Don't have an account? Sign up
-        </button>
+      <div className="text-center text-sm text-gray-600">
+        <p>Default Admin: admin@chabs.com / admin123</p>
+        <p>Default Warehouse: warehouse@chabs.com / warehouse123</p>
       </div>
     </form>
   );

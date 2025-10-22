@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { auth } from '../lib/auth-supabase';
+import { me } from '../lib/auth-simple';
 import LoginForm from '../components/LoginForm';
-import SignUpForm from '../components/SignUpForm';
 import { useBranding } from '../contexts/BrandingContext';
 
 export default function LoginPage() {
   const router = useRouter();
   const { branding } = useBranding();
-  const [showSignUp, setShowSignUp] = useState(false);
 
   useEffect(() => {
-    auth.getCurrentUser().then(user => {
-      if (user) {
-        router.push('/dashboard');
-      }
-    });
+    const user = me();
+    if (user) {
+      router.push('/dashboard');
+    }
   }, [router]);
 
   return (
@@ -38,17 +35,7 @@ export default function LoginPage() {
         </div>
         
         <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          {showSignUp ? (
-            <SignUpForm 
-              onSuccess={() => {
-                alert('Account created! Please check your email to verify your account.');
-                setShowSignUp(false);
-              }}
-              onSwitchToLogin={() => setShowSignUp(false)}
-            />
-          ) : (
-            <LoginForm onSwitchToSignUp={() => setShowSignUp(true)} />
-          )}
+          <LoginForm />
         </div>
         
         <div className="text-center mt-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>

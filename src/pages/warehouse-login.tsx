@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { auth } from '../lib/auth-supabase';
+import { login, me } from '../lib/auth-simple';
 import { useBranding } from '../contexts/BrandingContext';
 
 export default function WarehouseLoginPage() {
@@ -12,11 +12,10 @@ export default function WarehouseLoginPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    auth.getCurrentUser().then(user => {
-      if (user) {
-        router.push('/warehouse-dashboard');
-      }
-    });
+    const user = me();
+    if (user && (user.role === 'warehouse' || user.role === 'admin')) {
+      router.push('/warehouse-dashboard');
+    }
   }, [router]);
 
   const submit = async (e: React.FormEvent) => {
@@ -25,17 +24,19 @@ export default function WarehouseLoginPage() {
     setError('');
     
     try {
-      await auth.signIn(email, password);
-      // Check if user has warehouse access after login
-      const user = await auth.getCurrentUser();
-      if (user?.user_metadata?.role === 'warehouse' || user?.user_metadata?.role === 'admin') {
-        router.push('/warehouse-dashboard');
+      const success = login(email, password);
+      if (success) {
+        const user = me();
+        if (user?.role === 'warehouse' || user?.role === 'admin') {
+          router.push('/warehouse-dashboard');
+        } else {
+          setError('Access denied. Warehouse credentials required.');
+        }
       } else {
-        setError('Access denied. Warehouse credentials required.');
-        await auth.signOut();
+        setError('Invalid email or password');
       }
     } catch (err: any) {
-      setError(err.message);
+      setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -101,6 +102,12 @@ export default function WarehouseLoginPage() {
           <button className="btn w-full text-lg py-4" type="submit" disabled={loading}>
             {loading ? 'Signing In...' : 'Warehouse Sign In'}
           </button>
+          
+          <div className="text-center text-sm text-gray-600 bg-gray-50 p-3 rounded">
+            <p className="font-medium">Default Warehouse Credentials:</p>
+            <p>Email: warehouse@chabs.com</p>
+            <p>Password: warehouse123</p>
+          </div>
         </form>
         
         <div className="text-center mt-8 space-y-2">

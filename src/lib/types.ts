@@ -377,6 +377,12 @@ export interface ExternalProcess {
   description?: string;
   leadTime: number; // days
   costPerUnit: number;
+  minimumQuantity?: number;
+  currency: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}PerUnit: number;
   minimumQuantity: number;
 }
 
