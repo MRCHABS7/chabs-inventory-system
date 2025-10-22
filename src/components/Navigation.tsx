@@ -53,7 +53,7 @@ export default function Navigation() {
   const navItems = getNavItems();
 
   // Prevent hydration mismatch by not rendering until client-side
-  if (!isClient || !user) {
+  if (!isClient) {
     return (
       <nav className="bg-gray-900 backdrop-blur-lg border-b border-gray-700 sticky top-0 z-50 shadow-xl">
         <div className="container">
@@ -73,6 +73,10 @@ export default function Navigation() {
         </div>
       </nav>
     );
+  }
+
+  if (!user) {
+    return null;
   }
 
   return (
