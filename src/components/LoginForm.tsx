@@ -70,7 +70,7 @@ export default function LoginForm({ onSwitchToSignUp }: LoginFormProps) {
       </div>
       
       <button className="btn w-full text-lg py-4" type="submit" disabled={loading}>
-        {loading ? '🔄 Signing In...' : '🚀 Sign In'}
+        {loading ? 'Signing In...' : 'Sign In'}
       </button>
       
       <div className="text-center">

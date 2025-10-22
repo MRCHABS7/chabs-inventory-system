@@ -105,7 +105,7 @@ export default function BusinessDashboard() {
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Welcome back, {isClient && user ? `${user.firstName} ${user.lastName}`.trim() || user.email || 'User' : 'User'}! 👋
+              Welcome back, {isClient && user ? `${user.firstName} ${user.lastName}`.trim() || user.email || 'User' : 'User'}!
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
               Here's what's happening with your business today
@@ -166,7 +166,7 @@ export default function BusinessDashboard() {
       {alerts.length > 0 && (
         <div className="card">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            🚨 System Alerts & Recommendations
+            System Alerts & Recommendations
           </h3>
           <div className="space-y-3">
             {alerts.map((alert, idx) => (
@@ -208,27 +208,27 @@ export default function BusinessDashboard() {
       <div className="card">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            ⚡ Quick Actions
+            Quick Actions
           </h3>
           <button className="btn btn-secondary text-sm">
-            ⚙️ Customize
+            Customize
           </button>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <button className="p-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all floating">
-            <div className="text-2xl mb-2">📦</div>
+            <div className="text-sm font-bold mb-2">PROD</div>
             <div className="font-medium">Add Product</div>
           </button>
           <button className="p-4 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all floating">
-            <div className="text-2xl mb-2">🛒</div>
+            <div className="text-sm font-bold mb-2">ORD</div>
             <div className="font-medium">New Order</div>
           </button>
           <button className="p-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all floating">
-            <div className="text-2xl mb-2">👥</div>
+            <div className="text-sm font-bold mb-2">CUST</div>
             <div className="font-medium">Add Customer</div>
           </button>
           <button className="p-4 bg-gradient-to-r from-pink-600 to-purple-500 text-white rounded-lg hover:from-pink-700 hover:to-purple-600 transition-all floating">
-            <div className="text-2xl mb-2">📊</div>
+            <div className="text-sm font-bold mb-2">RPT</div>
             <div className="font-medium">View Reports</div>
           </button>
         </div>
@@ -238,7 +238,7 @@ export default function BusinessDashboard() {
       <div className="grid md:grid-cols-2 gap-6">
         <div className="card">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            📈 Recent Orders
+            Recent Orders
           </h3>
           <div className="space-y-3">
             {orders.slice(0, 5).map(order => (
@@ -266,7 +266,7 @@ export default function BusinessDashboard() {
 
         <div className="card">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            📦 Inventory Status
+            Inventory Status
           </h3>
           <div className="space-y-3">
             {products.slice(0, 5).map(product => (

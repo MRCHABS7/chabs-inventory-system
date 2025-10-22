@@ -114,7 +114,7 @@ export default function WarehouseDashboard() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">🏪 Warehouse Dashboard</h1>
+            <h1 className="text-3xl font-bold text-foreground">Warehouse Dashboard</h1>
             <p className="text-muted-foreground">Inventory control and stock management</p>
           </div>
           <div className="text-sm text-muted-foreground">
@@ -131,7 +131,7 @@ export default function WarehouseDashboard() {
                 <p className="text-2xl font-bold text-foreground">{counts.totalProducts}</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                <span className="text-white text-xl">📦</span>
+                <span className="text-white text-xs font-bold">PROD</span>
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@ export default function WarehouseDashboard() {
                 <p className="text-2xl font-bold text-orange-600">{counts.lowStock}</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-                <span className="text-white text-xl">⚠️</span>
+                <span className="text-white text-xs font-bold">LOW</span>
               </div>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function WarehouseDashboard() {
                 <p className="text-2xl font-bold text-red-600">{counts.outOfStock}</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <span className="text-white text-xl">🚫</span>
+                <span className="text-white text-xs font-bold">OUT</span>
               </div>
             </div>
           </div>
@@ -167,7 +167,7 @@ export default function WarehouseDashboard() {
                 <p className="text-2xl font-bold text-blue-600">{counts.pendingOrders}</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
-                <span className="text-white text-xl">📋</span>
+                <span className="text-white text-xs font-bold">ORD</span>
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@ export default function WarehouseDashboard() {
                 <p className="text-2xl font-bold text-green-600">{counts.todayMovements}</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
-                <span className="text-white text-xl">📊</span>
+                <span className="text-white text-xs font-bold">MOV</span>
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@ export default function WarehouseDashboard() {
 
         {/* Picking Slip Statistics */}
         <div className="card p-6">
-          <h2 className="text-xl font-semibold text-foreground mb-4">📋 Picking Slip Statistics</h2>
+          <h2 className="text-xl font-semibold text-foreground mb-4">Picking Slip Statistics</h2>
           <div className="grid md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <div className="text-2xl font-bold text-gray-900 dark:text-white">{pickingSlipStats.totalPrints}</div>
@@ -210,7 +210,7 @@ export default function WarehouseDashboard() {
 
         {/* External Painting Statistics */}
         <div className="card p-6">
-          <h2 className="text-xl font-semibold text-foreground mb-4">🎨 External Painting Status</h2>
+          <h2 className="text-xl font-semibold text-foreground mb-4">External Painting Status</h2>
           <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
             <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <div className="text-2xl font-bold text-gray-900 dark:text-white">{externalProcessingStats.totalOrders}</div>
@@ -242,7 +242,7 @@ export default function WarehouseDashboard() {
               onClick={() => router.push('/external-processing')}
               className="btn btn-primary"
             >
-              🎨 Manage External Painting
+              Manage External Painting
             </button>
           </div>
         </div>
@@ -255,7 +255,7 @@ export default function WarehouseDashboard() {
               onClick={() => router.push('/warehouse')}
               className="btn btn-primary p-4 text-left"
             >
-              <div className="text-lg mb-2">🏪</div>
+              <div className="text-lg mb-2">Stock Management</div>
               <div className="font-medium">Manage Stock</div>
               <div className="text-sm opacity-80">Add, remove, or adjust inventory</div>
             </button>
@@ -264,7 +264,7 @@ export default function WarehouseDashboard() {
               onClick={() => router.push('/orders')}
               className="btn btn-secondary p-4 text-left"
             >
-              <div className="text-lg mb-2">📦</div>
+              <div className="text-lg mb-2">Order Processing</div>
               <div className="font-medium">Process Orders</div>
               <div className="text-sm opacity-80">View and fulfill orders</div>
             </button>
@@ -273,7 +273,7 @@ export default function WarehouseDashboard() {
               onClick={() => router.push('/products')}
               className="btn btn-secondary p-4 text-left"
             >
-              <div className="text-lg mb-2">📋</div>
+              <div className="text-lg mb-2">Product Catalog</div>
               <div className="font-medium">Product Catalog</div>
               <div className="text-sm opacity-80">View product information</div>
             </button>
@@ -282,7 +282,7 @@ export default function WarehouseDashboard() {
               onClick={() => router.push('/reports')}
               className="btn btn-secondary p-4 text-left"
             >
-              <div className="text-lg mb-2">📊</div>
+              <div className="text-lg mb-2">Stock Reports</div>
               <div className="font-medium">Stock Reports</div>
               <div className="text-sm opacity-80">View inventory reports</div>
             </button>
@@ -304,7 +304,7 @@ export default function WarehouseDashboard() {
                       <div>
                         <div className="font-medium text-foreground">{product?.name || 'Unknown Product'}</div>
                         <div className="text-sm text-muted-foreground">
-                          {movement.type === 'in' ? '📥' : movement.type === 'out' ? '📤' : '🔄'} 
+                          {movement.type === 'in' ? 'IN' : movement.type === 'out' ? 'OUT' : 'ADJ'} 
                           {movement.type.toUpperCase()} - {movement.quantity} units
                         </div>
                         <div className="text-xs text-muted-foreground">{movement.reason}</div>
@@ -352,7 +352,7 @@ export default function WarehouseDashboard() {
         {(counts.lowStock > 0 || counts.outOfStock > 0) && (
           <div className="card p-6 border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/20">
             <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center">
-              ⚠️ Stock Alerts
+              Stock Alerts
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
               {counts.outOfStock > 0 && (

@@ -161,24 +161,13 @@ export default function WarehouseManager() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Warehouse Management</h1>
           <p className="text-gray-600 dark:text-gray-400">Monitor inventory, track movements, and manage locations</p>
         </div>
-        {user?.role === 'warehouse' ? (
-          <button
-            onClick={() => setShowMovementForm(true)}
-            className="btn btn-primary"
-          >
-            📦 Record Movement
-          </button>
-        ) : (
-          <div className="bg-orange-100 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
-            <div className="flex items-center">
-              <span className="text-orange-600 dark:text-orange-400 text-xl mr-3">🔒</span>
-              <div>
-                <h3 className="font-medium text-orange-800 dark:text-orange-200">View Only Access</h3>
-                <p className="text-sm text-orange-600 dark:text-orange-400">Stock movements can only be recorded by warehouse users</p>
-              </div>
-            </div>
-          </div>
-        )}
+        <button
+          onClick={() => setShowMovementForm(true)}
+          className="btn btn-primary"
+          disabled={user?.role !== 'warehouse' && user?.role !== 'admin'}
+        >
+          Record Movement
+        </button>
       </div>
 
       {/* Stats Cards */}
@@ -189,7 +178,7 @@ export default function WarehouseManager() {
               <p className="text-sm text-gray-600 dark:text-gray-400">Total Products</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">{products.length}</p>
             </div>
-            <div className="text-3xl">📦</div>
+            <div className="text-3xl">Products</div>
           </div>
         </div>
         
@@ -199,7 +188,7 @@ export default function WarehouseManager() {
               <p className="text-sm text-gray-600 dark:text-gray-400">Stock Value</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">{formatCurrency(getStockValue())}</p>
             </div>
-            <div className="text-3xl">💰</div>
+            <div className="text-3xl">Value</div>
           </div>
         </div>
         
@@ -209,7 +198,7 @@ export default function WarehouseManager() {
               <p className="text-sm text-gray-600 dark:text-gray-400">Low Stock Items</p>
               <p className="text-2xl font-bold text-red-600">{getLowStockProducts().length}</p>
             </div>
-            <div className="text-3xl">⚠️</div>
+            <div className="text-3xl">Low Stock</div>
           </div>
         </div>
         
@@ -219,7 +208,7 @@ export default function WarehouseManager() {
               <p className="text-sm text-gray-600 dark:text-gray-400">Pending Orders</p>
               <p className="text-2xl font-bold text-blue-600">{getPendingOrders().length}</p>
             </div>
-            <div className="text-3xl">📋</div>
+            <div className="text-3xl">Orders</div>
           </div>
         </div>
       </div>
@@ -228,10 +217,10 @@ export default function WarehouseManager() {
       <div className="border-b border-gray-200 dark:border-gray-700">
         <nav className="-mb-px flex space-x-8">
           {[
-            { id: 'overview', label: 'Overview', icon: '📊' },
-            { id: 'movements', label: 'Stock Movements', icon: '📈' },
-            { id: 'locations', label: 'Locations', icon: '🏢' },
-            { id: 'picking', label: 'Order Picking', icon: '📋' }
+            { id: 'overview', label: 'Overview' },
+            { id: 'movements', label: 'Stock Movements' },
+            { id: 'locations', label: 'Locations' },
+            { id: 'picking', label: 'Order Picking' }
           ].map(tab => (
             <button
               key={tab.id}
@@ -242,14 +231,14 @@ export default function WarehouseManager() {
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
               }`}
             >
-              {tab.icon} {tab.label}
+              {tab.label}
             </button>
           ))}
         </nav>
       </div>
 
       {/* Stock Movement Form Modal */}
-      {showMovementForm && user?.role === 'warehouse' && (
+      {showMovementForm && (user?.role === 'warehouse' || user?.role === 'admin') && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Record Stock Movement</h2>
@@ -445,7 +434,7 @@ export default function WarehouseManager() {
           
           {stockMovements.length === 0 ? (
             <div className="text-center py-8">
-              <div className="text-6xl mb-4">📈</div>
+              <div className="text-6xl mb-4">Movements</div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No movements recorded</h3>
               <p className="text-gray-600 dark:text-gray-400">Stock movements will appear here</p>
             </div>
@@ -481,7 +470,7 @@ export default function WarehouseManager() {
                             movement.type === 'out' ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400' :
                             'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400'
                           }`}>
-                            {movement.type === 'in' ? '📥 In' : movement.type === 'out' ? '📤 Out' : '🔄 Adjustment'}
+                            {movement.type === 'in' ? 'IN' : movement.type === 'out' ? 'OUT' : 'ADJUST'}
                           </span>
                         </td>
                         <td className="py-3 px-4 font-medium text-gray-900 dark:text-white">
@@ -557,7 +546,7 @@ export default function WarehouseManager() {
           
           {getPendingOrders().length === 0 ? (
             <div className="text-center py-8">
-              <div className="text-6xl mb-4">📋</div>
+              <div className="text-6xl mb-4">Picking</div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No pending orders</h3>
               <p className="text-gray-600 dark:text-gray-400">Orders ready for picking will appear here</p>
             </div>

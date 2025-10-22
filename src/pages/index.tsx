@@ -33,37 +33,37 @@ export default function IndexPage() {
 
   const features = [
     {
-      icon: '📦',
+      icon: 'INV',
       title: 'Smart Inventory',
       description: 'Advanced stock management with real-time alerts and automated tracking.',
       gradient: 'from-blue-500 to-cyan-500'
     },
     {
-      icon: '💼',
+      icon: 'QUO',
       title: 'Professional Quotes',
       description: 'Generate branded quotations with custom templates and email integration.',
       gradient: 'from-emerald-500 to-teal-500'
     },
     {
-      icon: '📊',
+      icon: 'ANA',
       title: 'Business Analytics',
       description: 'Comprehensive insights with detailed reports and performance metrics.',
       gradient: 'from-violet-500 to-purple-500'
     },
     {
-      icon: '🏪',
+      icon: 'WMS',
       title: 'Warehouse Control',
       description: 'Complete warehouse management with location tracking and stock control.',
       gradient: 'from-orange-500 to-red-500'
     },
     {
-      icon: '🤝',
+      icon: 'SUP',
       title: 'Supplier Management',
       description: 'Manage supplier relationships and purchase orders efficiently.',
       gradient: 'from-pink-500 to-rose-500'
     },
     {
-      icon: '⚙️',
+      icon: 'SYS',
       title: 'System Features',
       description: 'Advanced automation, custom branding, and workflow optimization.',
       gradient: 'from-indigo-500 to-blue-500'
@@ -100,14 +100,20 @@ export default function IndexPage() {
                 customizable branding, and enterprise-grade functionality
               </p>
               
-              <div className="flex justify-center">
+              <div className="flex justify-center space-x-4">
                 <button
-                  onClick={() => router.push('/login')}
+                  onClick={() => router.push('/admin-login')}
                   className="btn btn-primary px-8 py-4 text-lg font-semibold shadow-glow animate-fade-in"
                   style={{ animationDelay: '0.2s' }}
                 >
-                  Launch Dashboard
-                  <span className="ml-2">→</span>
+                  Admin Portal
+                </button>
+                <button
+                  onClick={() => router.push('/warehouse-login')}
+                  className="btn btn-secondary px-8 py-4 text-lg font-semibold shadow-glow animate-fade-in"
+                  style={{ animationDelay: '0.3s' }}
+                >
+                  Warehouse Portal
                 </button>
               </div>
             </div>
@@ -132,7 +138,7 @@ export default function IndexPage() {
                 className="card interactive animate-slide-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center text-2xl mb-6 shadow-lg`}>
+                <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center text-sm font-bold text-white mb-6 shadow-lg`}>
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">
@@ -174,12 +180,20 @@ export default function IndexPage() {
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
               Join hundreds of companies already using CHABS to streamline their operations
             </p>
-            <button
-              onClick={() => router.push('/login')}
-              className="btn btn-primary px-8 py-4 text-lg font-semibold shadow-glow"
-            >
-              Get Started Today
-            </button>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={() => router.push('/admin-login')}
+                className="btn btn-primary px-8 py-4 text-lg font-semibold shadow-glow"
+              >
+                Admin Access
+              </button>
+              <button
+                onClick={() => router.push('/warehouse-login')}
+                className="btn btn-secondary px-8 py-4 text-lg font-semibold shadow-glow"
+              >
+                Warehouse Access
+              </button>
+            </div>
           </div>
         </div>
       </div>

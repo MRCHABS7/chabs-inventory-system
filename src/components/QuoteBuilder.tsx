@@ -409,7 +409,7 @@ export default function QuoteBuilder({
   return (
     <div className="card space-y-4">
       <h2 className="text-xl font-semibold text-gray-800 dark:text-white flex items-center">
-        📋 New Quotation
+        New Quotation
       </h2>
 
       {/* Customer Selection and Basic Info */}
@@ -611,7 +611,7 @@ export default function QuoteBuilder({
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-medium text-gray-800 dark:text-white">Items</h3>
           <button className="btn btn-secondary" type="button" onClick={addItem}>
-            ➕ Add Item
+            Add Item
           </button>
         </div>
 
@@ -636,24 +636,22 @@ export default function QuoteBuilder({
           
           return (
             <div key={i} className="space-y-3 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border">
-              {/* First Row - Product Selection and Basic Info */}
-              <div className="grid md:grid-cols-4 gap-3">
-                <div className="relative">
-                  <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
-                    Product - Type to search (e.g., "h" or "powerskirt")
-                  </label>
+              {/* Single Row - All Fields */}
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-2">
+                <div className="relative col-span-2">
+                  <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Product</label>
                   <ProductSearchInput
                     products={products}
                     selectedProductId={it.productId}
                     onProductSelect={(productId) => updateItem(i, { productId })}
-                    placeholder="Start typing product name..."
+                    placeholder="Type to search..."
                   />
                 </div>
                 
                 <div>
                   <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Quantity</label>
                   <input 
-                    className="input" 
+                    className="input text-sm" 
                     type="number" 
                     min={1} 
                     value={it.quantity} 
@@ -664,7 +662,7 @@ export default function QuoteBuilder({
                 <div>
                   <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Unit</label>
                   <select 
-                    className="input" 
+                    className="input text-sm" 
                     value={it.unit || 'EA'} 
                     onChange={e => updateItem(i, { unit: e.target.value })}
                   >
@@ -680,7 +678,7 @@ export default function QuoteBuilder({
                 <div>
                   <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Finish</label>
                   <select 
-                    className="input" 
+                    className="input text-sm" 
                     value={it.finish || 'PG'} 
                     onChange={e => updateItem(i, { finish: e.target.value })}
                   >
@@ -691,22 +689,8 @@ export default function QuoteBuilder({
                     <option value="SS">SS (Stainless Steel)</option>
                   </select>
                 </div>
-              </div>
 
-              {/* Second Row - Description */}
-              <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Description</label>
-                <input 
-                  className="input" 
-                  type="text"
-                  placeholder={product?.description || product?.name || "Enter item description"}
-                  value={it.description || ''} 
-                  onChange={e => updateItem(i, { description: e.target.value })} 
-                />
-              </div>
-
-              {/* Third Row - Pricing with History */}
-              <div className="grid md:grid-cols-5 gap-3">
+                {/* Pricing Fields */}
                 <div className="relative">
                   <div className="flex items-center justify-between mb-1">
                     <label className="block text-xs font-medium text-gray-600 dark:text-gray-400">Unit Price (R)</label>
@@ -716,7 +700,7 @@ export default function QuoteBuilder({
                         className="text-xs text-blue-600 hover:text-blue-800"
                         onClick={() => setShowPriceHistory({...showPriceHistory, [historyKey]: !showPriceHistory[historyKey]})}
                       >
-                        📊 History ({priceHistory.length})
+                        History
                       </button>
                     )}
                   </div>
@@ -804,11 +788,11 @@ export default function QuoteBuilder({
               {/* Remove Button */}
               <div className="flex justify-end">
                 <button 
-                  className="btn btn-danger" 
+                  className="btn btn-danger text-sm" 
                   type="button" 
                   onClick={() => removeItem(i)}
                 >
-                  🗑️ Remove Item
+                  Remove
                 </button>
               </div>
             </div>
@@ -856,12 +840,12 @@ export default function QuoteBuilder({
           
           <div className="flex gap-3">
             <button className="btn btn-secondary" type="button" onClick={save}>
-              💾 Save Draft
+              Save Draft
             </button>
             
             {customerDetails.email && onSaveAndEmail && (
               <button className="btn btn-primary" type="button" onClick={saveAndEmail}>
-                📧 Save & Email
+                Save & Email
               </button>
             )}
           </div>
@@ -869,7 +853,7 @@ export default function QuoteBuilder({
         
         {!customerDetails.email && (
           <div className="mt-2 text-sm text-amber-600 dark:text-amber-400">
-            ⚠️ Customer email required for direct sending
+            Warning: Customer email required for direct sending
           </div>
         )}
       </div>

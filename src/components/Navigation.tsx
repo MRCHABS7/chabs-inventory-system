@@ -27,30 +27,26 @@ export default function Navigation() {
 
   // Role-based navigation items
   const getNavItems = () => {
-    const dashboardItem = user?.role === 'admin' 
-      ? { href: '/admin-dashboard', label: 'Dashboard', icon: '' }
-      : { href: '/warehouse-dashboard', label: 'Dashboard', icon: '' };
-
     if (user?.role === 'warehouse') {
       return [
-        dashboardItem,
-        { href: '/products', label: 'Products', icon: '' },
-        { href: '/orders', label: 'Orders', icon: '' },
-        { href: '/advanced-warehouse', label: 'Warehouse', icon: '' },
-        { href: '/suppliers', label: 'Suppliers', icon: '' },
+        { href: '/warehouse-dashboard', label: 'Dashboard' },
+        { href: '/products', label: 'Products' },
+        { href: '/orders', label: 'Orders' },
+        { href: '/warehouse', label: 'Warehouse' },
+        { href: '/suppliers', label: 'Suppliers' },
       ];
     }
 
     // Admin gets full access
     return [
-      dashboardItem,
-      { href: '/customers', label: 'Customers', icon: '' },
-      { href: '/suppliers', label: 'Suppliers', icon: '' },
-      { href: '/products', label: 'Products', icon: '' },
-      { href: '/quotations', label: 'Quotes', icon: '' },
-      { href: '/orders', label: 'Orders', icon: '' },
-      { href: '/purchase-orders', label: 'Purchase Orders', icon: '' },
-      { href: '/advanced-warehouse', label: 'Warehouse', icon: '' },
+      { href: '/admin-dashboard', label: 'Dashboard' },
+      { href: '/customers', label: 'Customers' },
+      { href: '/suppliers', label: 'Suppliers' },
+      { href: '/products', label: 'Products' },
+      { href: '/quotations', label: 'Quotes' },
+      { href: '/orders', label: 'Orders' },
+      { href: '/purchase-orders', label: 'Purchase Orders' },
+      { href: '/warehouse', label: 'Warehouse' },
     ];
   };
 
@@ -91,9 +87,9 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.href}
-                href={item.href}
+                onClick={() => router.push(item.href)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 interactive ${
                   router.pathname === item.href
                     ? 'bg-gray-700 text-white shadow-md border border-gray-600'
@@ -101,7 +97,7 @@ export default function Navigation() {
                 }`}
               >
                 {item.label}
-              </Link>
+              </button>
             ))}
           </div>
 
@@ -151,10 +147,10 @@ export default function Navigation() {
                   {user.role === 'admin' && (
                     <>
                       <Link href="/manual" className="block px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors">
-                        📖 User Manual
+                        User Manual
                       </Link>
                       <Link href="/technical-manual" className="block px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors">
-                        🔧 Technical Manual
+                        Technical Manual
                       </Link>
                     </>
                   )}
@@ -167,7 +163,7 @@ export default function Navigation() {
                   {user.role === 'admin' && (
                     <>
                       <Link href="/automation" className="block px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors">
-                        AI & Automation
+                        Automation
                       </Link>
                       <Link href="/reports" className="block px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors">
                         Reports
@@ -197,7 +193,7 @@ export default function Navigation() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="lg:hidden p-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg"
             >
-              <span className="text-xl">{isMenuOpen ? '✕' : '☰'}</span>
+              <span className="text-xl">{isMenuOpen ? 'X' : 'Menu'}</span>
             </button>
           </div>
         </div>
@@ -207,10 +203,12 @@ export default function Navigation() {
           <div className="lg:hidden py-4 border-t border-gray-700 animate-slide-in">
             <div className="grid grid-cols-2 gap-2">
               {navItems.map((item) => (
-                <Link
+                <button
                   key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    router.push(item.href);
+                  }}
                   className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-sm font-medium transition-all interactive ${
                     router.pathname === item.href
                       ? 'bg-gray-700 text-white border border-gray-600'
@@ -218,7 +216,7 @@ export default function Navigation() {
                   }`}
                 >
                   <span>{item.label}</span>
-                </Link>
+                </button>
               ))}
             </div>
           </div>

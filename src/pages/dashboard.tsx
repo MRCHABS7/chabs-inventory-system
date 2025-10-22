@@ -13,6 +13,13 @@ export default function DashboardPage() {
       router.replace('/');
       return;
     }
+    
+    // Redirect to role-specific dashboard
+    if (user.role === 'admin') {
+      router.replace('/admin-dashboard');
+    } else if (user.role === 'warehouse') {
+      router.replace('/warehouse-dashboard');
+    }
   }, [user, router]);
 
   if (!user) {
@@ -23,7 +30,9 @@ export default function DashboardPage() {
     <Layout>
       <div className="min-h-screen gradient-bg">
         <div className="container py-6">
-          <BusinessDashboard />
+          <div className="text-center">
+            <div>Redirecting to your dashboard...</div>
+          </div>
         </div>
       </div>
     </Layout>
