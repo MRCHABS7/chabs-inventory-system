@@ -57,7 +57,11 @@ export default function ExternalSupplierManager() {
     const newProcess: ExternalProcess = {
       id: `proc_${Date.now()}`,
       supplierId: selectedSupplierId,
-      ...processData
+      ...processData,
+      currency: 'ZAR',
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     };
 
     // Add process to supplier's external processes

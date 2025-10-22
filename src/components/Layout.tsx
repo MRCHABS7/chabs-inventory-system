@@ -2,7 +2,6 @@ import { ReactNode, useState, useEffect } from 'react';
 import Navigation from './Navigation';
 import MenuBar from './MenuBar';
 import StatusBar from './StatusBar';
-import ClientOnly from './ClientOnly';
 import { me } from '../lib/auth-simple';
 import { useBranding } from '../contexts/BrandingContext';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
@@ -29,16 +28,12 @@ export default function Layout({ children, showNavigation = true }: LayoutProps)
 
   return (
     <div className="min-h-screen bg-background pb-6">
-      <ClientOnly>
-        {shouldShowNav && <MenuBar />}
-        {shouldShowNav && <Navigation />}
-      </ClientOnly>
+      {shouldShowNav && <MenuBar />}
+      {shouldShowNav && <Navigation />}
       <div className={shouldShowNav ? 'pt-0' : ''}>
         {children}
       </div>
-      <ClientOnly>
-        {shouldShowNav && <StatusBar />}
-      </ClientOnly>
+      {shouldShowNav && <StatusBar />}
       
       {/* Footer */}
       {shouldShowNav && (
