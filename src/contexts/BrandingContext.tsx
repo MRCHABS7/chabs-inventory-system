@@ -41,18 +41,24 @@ const BrandingContext = createContext<BrandingContextType | undefined>(undefined
 
 export const BrandingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [branding, setBranding] = useState<BrandingSettings>(defaultBranding);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('brandingSettings');
-    if (saved) {
-      setBranding({ ...defaultBranding, ...JSON.parse(saved) });
+    setIsClient(true);
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('brandingSettings');
+      if (saved) {
+        setBranding({ ...defaultBranding, ...JSON.parse(saved) });
+      }
     }
   }, []);
 
   const updateBranding = (settings: Partial<BrandingSettings>) => {
     const updated = { ...branding, ...settings };
     setBranding(updated);
-    localStorage.setItem('brandingSettings', JSON.stringify(updated));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('brandingSettings', JSON.stringify(updated));
+    }
   };
 
   return (

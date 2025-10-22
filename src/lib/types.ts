@@ -383,6 +383,12 @@ export interface ExternalProcess {
   createdAt: string;
   updatedAt: string;
 }PerUnit: number;
+  minimumQuantity?: number;
+  currency: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}PerUnit: number;
   minimumQuantity: number;
 }
 

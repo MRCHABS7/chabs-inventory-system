@@ -18,15 +18,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
-    // Load theme from localStorage
-    const savedTheme = localStorage.getItem('chabs_theme') as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
+    // Load theme from localStorage only on client side
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('chabs_theme') as Theme;
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
     }
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || typeof window === 'undefined') return;
     
     // Save theme to localStorage
     localStorage.setItem('chabs_theme', theme);
