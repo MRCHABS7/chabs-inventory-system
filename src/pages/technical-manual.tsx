@@ -19,20 +19,20 @@ export default function TechnicalManual() {
   }
 
   const sections = [
-    { id: 'overview', title: '🎯 Overview', icon: '📋' },
-    { id: 'architecture', title: '🏗️ System Architecture', icon: '🏗️' },
-    { id: 'files', title: '📁 File Structure', icon: '📁' },
-    { id: 'programming', title: '💻 Programming Basics', icon: '💻' },
-    { id: 'issues', title: '🔧 Common Issues', icon: '🔧' },
-    { id: 'changes', title: '✏️ Making Changes', icon: '✏️' },
-    { id: 'troubleshooting', title: '🚨 Troubleshooting', icon: '🚨' },
-    { id: 'deployment', title: '🚀 Deployment', icon: '🚀' },
-    { id: 'database', title: '💾 Database Management', icon: '💾' },
-    { id: 'security', title: '🔒 Security & Backup', icon: '🔒' },
-    { id: 'performance', title: '⚡ Performance', icon: '⚡' },
-    { id: 'tools', title: '🛠️ Development Tools', icon: '🛠️' },
-    { id: 'help', title: '📞 Getting Help', icon: '📞' },
-    { id: 'reference', title: '🎯 Quick Reference', icon: '🎯' }
+    { id: 'overview', title: 'Overview' },
+    { id: 'architecture', title: 'System Architecture' },
+    { id: 'files', title: 'File Structure' },
+    { id: 'programming', title: 'Programming Basics' },
+    { id: 'issues', title: 'Common Issues' },
+    { id: 'changes', title: 'Making Changes' },
+    { id: 'troubleshooting', title: 'Troubleshooting' },
+    { id: 'deployment', title: 'Deployment' },
+    { id: 'database', title: 'Database Management' },
+    { id: 'security', title: 'Security & Backup' },
+    { id: 'performance', title: 'Performance' },
+    { id: 'tools', title: 'Development Tools' },
+    { id: 'help', title: 'Getting Help' },
+    { id: 'reference', title: 'Quick Reference' }
   ];
 
   const renderContent = () => {
@@ -40,7 +40,7 @@ export default function TechnicalManual() {
       case 'overview':
         return (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">🎯 System Overview</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">System Overview</h2>
             <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
               <h3 className="text-lg font-semibold mb-3">Welcome to Your Technical Manual</h3>
               <p className="text-gray-700 dark:text-gray-300 mb-4">
@@ -89,7 +89,6 @@ export default function TechnicalManual() {
                         : 'hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >
-                    <span className="mr-2">{section.icon}</span>
                     {section.title}
                   </button>
                 ))}
